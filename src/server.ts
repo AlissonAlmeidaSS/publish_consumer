@@ -13,12 +13,10 @@ app.use(express.json());
 
 router.post('', async (req: Request, res: Response) => {
   try {
+    const opt = { credentials: require('amqplib').credentials.plain('alisson', 'admin') };
     const { queue, message } = req.body;
-    amqp.connect('amqp://alisson:admin@localhost', (err, conn) => {});
-    
     const conn: Connection = await connect(amqp);
     const channel: Channel = await amqp.createChannel();
-
     channel.sendToQueue(queue, Buffer.from(message));
     return res.status(200).send('Mensagem enviada com sucesso');
   } catch(erro) {
