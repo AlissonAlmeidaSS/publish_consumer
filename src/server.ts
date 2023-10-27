@@ -13,10 +13,6 @@ app.use(express.json());
 
 router.post('', async (req: Request, res: Response) => {
   try {
-    /*/ conexao pelo metodo credentials da interface Connection
-    const opt = { credentials: require('amqplib').credentials.plain('alisson', 'admin') };
-    amqp.connect('amqp://localhost', opt, (err, conn) => {});*/
-    // conexao por outra forma
     const { queue, message } = req.body;
     amqp.connect('amqp://alisson:admin@localhost', (err, conn) => {});
     
